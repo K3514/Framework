@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História de Amor</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        :root {
+            --primary-color: #ff8395;
+            --secondary-color: #91c8ff;
+            --accent-color: #eb001f;
+            --text-color: #333;
+            --light-pink: #ffc3e4;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            background-color: var(--light-pink);
+        }
+        
+        .fancy-title {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(245, 83, 83, 0.4), rgba(255, 61, 61, 0.4)), url('https://source.unsplash.com/1600x900/?couple,romantic') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .heart-divider {
+            position: relative;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .heart-divider::before {
+            content: "❤";
+            font-size: 2rem;
+            color: var(--primary-color);
+            background-color: var(--light-pink);
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .heart-divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid #ddd;
+            z-index: 0;
+        }
+        
+        .photo-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-card:hover .photo-caption {
+            opacity: 1;
+        }
+        
+        .message-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 4rem;
+            font-family: 'Dancing Script', cursive;
+            color: rgba(232, 74, 95, 0.1);
+            line-height: 1;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            width: 45%;
+        }
+        
+        .timeline-left {
+            left: 0;
+        }
+        
+        .timeline-right {
+            left: 55%;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            margin-left: -10px;
+            z-index: 1;
+        }
+        
+        .polaroid {
+            background-color: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: rotate(var(--rotation));
+            transition: all 0.3s ease;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 2;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .polaroid p {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .memories-container {
+            position: relative;
+            height: 500px;
+        }
+        
+        .memory {
+            position: absolute;
+            --rotation: calc(var(--i) * 5deg);
+        }
+        
+        .memory:nth-child(1) { --i: -2; top: 10%; left: 10%; }
+        .memory:nth-child(2) { --i: 1; top: 15%; left: 40%; }
+        .memory:nth-child(3) { --i: -1; top: 20%; left: 70%; }
+        .memory:nth-child(4) { --i: 2; top: 50%; left: 20%; }
+        .memory:nth-child(5) { --i: -3; top: 60%; left: 50%; }
+        .memory:nth-child(6) { --i: 1; top: 40%; left: 75%; }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                left: 80px !important;
+            }
+            
+            .timeline-dot {
+                left: 40px;
+            }
+            
+            .memories-container {
+                height: auto;
+            }
+            
+            .memory {
+                position: relative;
+                margin-bottom: 30px;
+                top: auto !important;
+                left: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container hero-content">
+            <h1 class="display-3 mb-4 fancy-title">Fulana e Sicrano</h1>
+            <p class="lead mb-5">Nossa história de amor em fotos e mensagens</p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="py-5" id="fotos">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fancy-title display-4">Nossas Fotos</h2>
+                <p class="lead text-muted">Momentos especiais capturados para sempre</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="7.png" alt="Casal">
+                        <div class="photo-caption">
+                            <h5>Nosso primeiro encontro</h5>
+                            <p>O passeio de bike mudou nossas vidas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="8.png" alt="Casal na praia">
+                        <div class="photo-caption">
+                            <h5>Férias de verão</h5>
+                            <p>Dias inesquecíveis à beira-mar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="9.png" alt="Casal no pôr do sol">
+                        <div class="photo-caption">
+                            <h5>Primeira viagem</h5>
+                            <p>Nossa primeira vez viajando juntos e já planejando a proxima parada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="10.png" alt="Jantar romântico">
+                        <div class="photo-caption">
+                            <h5>Pôr do sol mágico</h5>
+                            <p>Quando vimos que queriamos isso para sempre</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="11.png" alt="Casal nas montanhas">
+                        <div class="photo-caption">
+                            <h5>Nosso casamento</h5>
+                            <p>Quando prometemos ficar juntos para sempre </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photo-card">
+                        <img src="12.png" alt="Casal na cidade">
+                        <div class="photo-caption">
+                            <h5>Passeio na cidade</h5>
+                            <p>Explorando novos lugares juntos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="heart-divider"></div>
+
+    <!-- Messages Section -->
+    <section class="py-5" id="mensagens">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fancy-title display-4">Mensagens de Amor</h2>
+                <p class="lead text-muted">Palavras que vêm do coração</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="message-card">
+                        <p class="mb-3">Lembro do nosso primeiro jantar em que ficamos horas conversando, sem pressa, como se o tempo tivesse desacelerado só para nos dar aquele momento. O jeito que você me olhou e disse que queria ouvir mais sobre mim... Aquela noite ficou gravada na minha memória, e eu não consigo mais imaginar minha vida sem você</p>
+                        <p class="text-end mb-0 fancy-title fs-5">- Fulana</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="message-card">
+                        <p class="mb-3">Eu nunca vou esquecer o nosso primeiro passeio juntos. Aquele dia estava nublado, mas parecia que o sol brilhava só pra gente. Fui completamente surpreendido pela sua risada e o jeito leve de ver a vida. Eu soube, naquele instante, que nossos caminhos estavam entrelaçados</p>
+                        <p class="text-end mb-0 fancy-title fs-5">- Sicrano</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="message-card">
+                        <p class="mb-3">Às vezes me pego pensando no nosso primeiro beijo. Não foi nada de extraordinário, mas parecia que o mundo inteiro se silenciou naquele segundo. Eu fiquei ali, sem saber o que fazer com tanto sentimento. Foi simples, mas foi perfeito, porque foi com você</p>
+                        <p class="text-end mb-0 fancy-title fs-5">- Sicrano</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="message-card">
+                        <p class="mb-3">Hoje, ao olhar as fotos daquela viagem que fizemos juntos, me veio uma lembrança vívida de quando estávamos explorando aquele mercado cheio de cores e aromas. Eu ri de você tentando negociar o preço de um brinquedo, mas o melhor foi ver a alegria nos seus olhos. Desde aquele momento, sabia que qualquer lugar seria especial se fosse ao seu lado.</p>
+                        <p class="text-end mb-0 fancy-title fs-5">- Fulana</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="heart-divider"></div>
+
+    <!-- Timeline Section -->
+    <section class="py-5" id="timeline">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fancy-title display-4">Nossa História</h2>
+                <p class="lead text-muted">Os momentos que construíram nosso amor</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-left">
+                        <span class="timeline-date">17 de setembro, 2019</span>
+                        <h4>Primeiro Encontro</h4>
+                        <p>Nos conhecemos em uma festa de amigos que temos em comum. Uma conversa que deveria durar minutos se estendeu por horas.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-right">
+                        <span class="timeline-date">20 de Janeiro, 2020</span>
+                        <h4>Namoro Oficial</h4>
+                        <p>Após alguns meses de encontros e conversas, oficializamos nosso relacionamento em um jantar romântico no nosso restaurante preferido.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-left">
+                        <span class="timeline-date">25 de Dezembro, 2020</span>
+                        <h4>Primeiro Natal Juntos</h4>
+                        <p>Celebramos nosso primeiro Natal como casal, criando novas tradições que levaremos para a vida toda.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-right">
+                        <span class="timeline-date">14 de Fevereiro, 2021</span>
+                        <h4>Viagem Romântica</h4>
+                        <p>Nossa primeira viagem juntos para a praia, onde descobrimos ainda mais afinidades e fortalecemos nosso amor.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-left">
+                        <span class="timeline-date"> 20 de janeiro, 2022</span>
+                        <h4>Noivado</h4>
+                        <p>Em nosso aniversário de namoro de 2 anos, sicrano me surpreendeu com um pedido de casamento inesquecível.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-right">
+                        <span class="timeline-date">10 de Junho, 2022</span>
+                        <h4>casamento</h4>
+                        <p>Nosso casamento foi inesquecível, convidamos somente pessoas que consideramos especiais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="heart-divider"></div>
+
+    <!-- Memories Section -->
+    <section class="py-5" id="memorias">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fancy-title display-4">Memórias Especiais</h2>
+                <p class="lead text-muted">Pequenos momentos que fazem nossa história única</p>
+            </div>
+            
+            <div class="memories-container">
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="1.png" alt="Café da manhã">
+                        <p>Primeiro piquinique</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="2.png" alt="Cinema">
+                        <p>Nosso casamento</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="3.png" alt="Piquenique">
+                        <p>Piquenique no parque</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="4.png" alt="Cozinhando juntos">
+                        <p>Comemoração dos dias dos namorados</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="5.png" alt="Dançando">
+                        <p>Nossa primeira viagem</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="polaroid">
+                        <img src="6.png" alt="Aniversário">
+                        <p>Nosso passeio de bicicleta na praia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p class="mb-0">Com amor, Fulana & Sicrano | 2025</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+</body>
+</html>
